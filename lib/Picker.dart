@@ -188,8 +188,8 @@ class Picker {
                 confirmText ?? PickerLocalizations.of(context).confirmText;
             if (_confirmText != null && _confirmText != "") {
               actions.add(FlatButton(
-                  onPressed: () {
-                    Navigator.pop<List<int>>(context, selecteds);
+                  onPressed: () async {
+                    await Navigator.pop<List<int>>(context, selecteds);
                     if (onConfirm != null) onConfirm(this, selecteds);
                   },
                   child: confirmTextStyle == null
@@ -224,9 +224,9 @@ class Picker {
   }
 
   /// 确定
-  void doConfirm(BuildContext context) {
+  void doConfirm(BuildContext context) async {
+    await Navigator.of(context).pop();
     if (onConfirm != null) onConfirm(this, selecteds);
-    Navigator.of(context).pop();
     _widget = null;
   }
 
